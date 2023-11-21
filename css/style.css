@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+header {
+    background-color: #009688;
+    height: 5rem;
+    width: 100%;
+}
+
+main {
+    background-color: #DCDBD2;
+}
+
+.sent {
+    background-color: #D5F9BA;
+}
+
+.received {
+    background-color: #FFFFFF;
+}
+
+.userHeader{
+    background-color: #EAEAEA;
+}
+
+.userphoto{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.notifications{
+    background-color: #8EDAFC;
+}
+
+.bell{
+    border-radius: 50%;
+    height: 3rem;
+    background-color: white;
+    width: 3rem;
+    text-align: center;
+    padding: 0.7rem;
+}
+
+.searchbar{
+    background-color: #FAFAFA;
+}
+
