@@ -14,15 +14,15 @@
 
 <body>
 
-    <header>
+    <header class="position-absolute top-0 z-0">
 
     </header>
     <main>
-        <div class="container">
+        <div class="container h-100">
             <div id="app">
 
-                <div class="row">
-                    <div class="col-4">
+                <div class="row z-1 position-relative mt-5">
+                    <div class="col-4 p-0">
                         <!-- Info user -->
                         <div class="userHeader d-flex align-items-center justify-content-between">
                             <div>
@@ -67,8 +67,10 @@
                         </div>
                         <!-- people -->
                         <div class="bg-white">
-                            <div v-for="(contact,i) in contacts" :key="i"  class="p-1 d-flex border-top border-1 border-secondary justify-content-between">
-                                <div class="d-flex">
+                            <div v-for="(contact,i) in contacts" :key="i"
+                                class="p-1 d-flex border-top border-1 border-secondary justify-content-between"
+                                @click="setActiveContact(i)" :class="activeContact == i ? 'clicked': ''">
+                                <div class="d-flex" >
                                     <img :src="contact.avatar" class="userphoto" alt="">
                                     <div class="m-1 ">
                                         <span>{{contact.name}}</span>
@@ -85,8 +87,48 @@
                         </div>
 
                     </div>
-                    <div class="col-8">
+                    <!-- Chat window -->
+                    <div class="col-8 p-0">
+                        <!-- header chat -->
+                        <section class="chatHeader d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img class="userphoto" :src="contacts[activeContact].avatar" alt="">
+                                <div class="d-flex flex-column m-2">
+                                    <span>{{contacts[activeContact].name}}</span>
+                                    <p>Ultimo accesso oggi alle 12.00</p>
 
+                                </div>
+
+                            </div>
+                            <div>
+                                <i class="m-2 fa-solid fa-magnifying-glass fa-lg" style="color: #b1b1b1;"></i>
+                                <i class="m-2 fa-solid fa-paperclip fa-lg" style="color: #b1b1b1;"></i>
+                                <i class="m-2 fa-solid fa-ellipsis-vertical fa-lg" style="color: #b1b1b1;"></i>
+                            </div>
+                        </section>
+                        <!-- main -->
+                        <section class="chatMain">
+                            <div class="w-75 m-auto d-flex flex-column">
+                                <div v-for="(msg, i) in contacts[activeContact].messages" :class="msg.status == 'sent' ? 'sent p-1 m-1' : 'received p-1 m-1'">
+                                    {{msg.message}}
+                                   <span class="time">{{convertDate(msg.date)}}</span> 
+
+                                </div>
+                            </div>
+
+
+                        </section>
+                        <!-- footer -->
+                        <section class="chatFooter">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <i class="fa-regular fa-face-smile fa-xl ms-2" style="color: #6b7375;"></i>
+                                <div class="flex-grow-1 p-3">
+                                    <input type="text" class="form-control mt-1" id="exampleFormControlInput1"
+                                        placeholder="Scrivi un messaggio" v-model="userMsg" @keyUp.enter="sendMsg">
+                                </div>
+                                <i class="fa-solid fa-microphone fa-lg me-2" style="color: #6b7375;"></i>
+                            </div>
+                        </section>
                     </div>
                 </div>
 

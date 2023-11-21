@@ -20,27 +20,36 @@ main {
 
 .sent {
     background-color: #D5F9BA;
+    margin-top: 0.5rem;
+    text-align: center;
+    align-self: end;
+    border-radius: 4px;
 }
+
 
 .received {
     background-color: #FFFFFF;
+    margin-top: 0.5rem;
+    text-align: center;
+    align-self: start;
+    border-radius: 4px;
 }
 
-.userHeader{
+.userHeader {
     background-color: #EAEAEA;
 }
 
-.userphoto{
+.userphoto {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
 }
 
-.notifications{
+.notifications {
     background-color: #8EDAFC;
 }
 
-.bell{
+.bell {
     border-radius: 50%;
     height: 3rem;
     background-color: white;
@@ -49,7 +58,32 @@ main {
     padding: 0.7rem;
 }
 
-.searchbar{
+.searchbar {
     background-color: #FAFAFA;
+
 }
 
+.chatHeader {
+    background-color: #EAEAEA;
+    height: 4rem;
+}
+
+.chatMain {
+    background-image: url("../img/mine.jpg");
+    height: calc(100% - 8rem);
+}
+
+.chatFooter{
+    background-color: #F3EEEA;
+    height: 4rem;
+}
+
+.clicked{
+    background-color: rgba(234, 231, 231, 0.8);
+}
+
+.time{
+    font-size: 8px;
+    color: grey;
+    text-align: right;
+}

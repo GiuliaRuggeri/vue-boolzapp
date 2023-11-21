@@ -164,14 +164,11 @@ const opzioni = {
                             status: 'received'
                         }
                     ],
-
-                    // user:{
-                    //     name: Me,
-                    //     avatar:""
-                    //     visible:true,
-                    // }
                 }
-            ]
+            ],
+
+            activeContact: 0,
+            userMsg: "",
 
 
 
@@ -181,6 +178,38 @@ const opzioni = {
     },
 
     methods: {
+
+        setActiveContact(i) {
+            this.activeContact = i
+            console.log(this.activeContact)
+        },
+
+        convertDate(dates) {
+            const d = new Date(dates);
+            let text = d.toLocaleString("it-IT", { timeStyle: "short" });
+            return text;
+        },
+
+        sendMsg(){
+            const date=new Date()
+            let newMsg={
+                date: date.toISOString(),
+                message:this.userMsg,
+                status:'sent',
+            }
+            this.contacts[this.activeContact].messages.push(newMsg)
+            this.userMsg=""
+
+            setTimeout(()=>{
+                const date=new Date()
+            let newMsg={
+                date: date.toISOString(),
+                message:'ok',
+                status:'received',
+            }
+            this.contacts[this.activeContact].messages.push(newMsg)
+            },1000)
+        }
 
 
     }
