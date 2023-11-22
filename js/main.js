@@ -1,4 +1,6 @@
 const { createApp } = Vue;
+const dt = luxon.DateTime;
+
 
 const opzioni = {
     data: function () {
@@ -169,7 +171,7 @@ const opzioni = {
 
             activeContact: 0,
             userMsg: "",
-            searchName:"",
+            searchName: "",
 
 
 
@@ -184,16 +186,14 @@ const opzioni = {
             console.log(this.activeContact)
         },
 
-        convertDate(dates) {
-            const d = new Date(dates);
-            let text = d.toLocaleString("it-IT", { timeStyle: "short" });
-            return text;
+        convertDate(fullDate) {
+            const luxonDate = dt.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
+            return luxonDate.toFormat("HH:mm");
         },
 
         sendMsg() {
-            const date = new Date()
             let newMsg = {
-                date: date.toISOString(),
+                date: dt.now().toFormat("dd/MM/yyyy HH:mm:ss"),
                 message: this.userMsg,
                 status: 'sent',
             }
@@ -201,9 +201,8 @@ const opzioni = {
             this.userMsg = ""
 
             setTimeout(() => {
-                const date = new Date()
                 let newMsg = {
-                    date: date.toISOString(),
+                    date: dt.now().toFormat("dd/MM/yyyy HH:mm:ss"),
                     message: 'ok',
                     status: 'received',
                 }
@@ -213,14 +212,18 @@ const opzioni = {
 
         searchUser() {
             this.contacts.forEach(element => {
-                if(element.name.includes(this.searchName)){
-                    element.visible=true
-                }else{
-                    element.visible=false
+                if (element.name.includes(this.searchName)) {
+                    element.visible = true
+                } else {
+                    element.visible = false
                 }
 
             });
-           
+
+        },
+
+        deleteMsg(index) {
+            this.contacts[this.activeContact].messages.splice(index, 1)
         }
 
 
