@@ -24,7 +24,8 @@
                 <div class="row z-1 position-relative mt-5">
                     <div class="col-4 p-0">
                         <!-- Info user -->
-                        <div class="userHeader d-flex align-items-center justify-content-between">
+                        <div
+                            class="userHeader d-flex align-items-center justify-content-between border-end border-1 border-secondary">
                             <div>
                                 <img src="img/avatar_io.jpg" class="userphoto m-2" alt="userphoto">
                                 <span>Me</span>
@@ -58,29 +59,29 @@
                         <!-- searchbar -->
                         <div class="searchbar">
                             <div class="input-group p-1">
-                                <span class="input-group-text bg-white" id="basic-addon1">
+                                <span class="input-group-text bg-white" id="basic-addon1" @click="searchUser">
                                     <i class="fa-solid fa-magnifying-glass fa-xs" style="color: #bcbbba;"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="cerca o inizia una nuova chat"
-                                    aria-label="Username" aria-describedby="basic-addon1">
+                                    aria-label="Username" aria-describedby="basic-addon1" v-model="searchName">
                             </div>
                         </div>
                         <!-- people -->
                         <div class="bg-white">
-                            <div v-for="(contact,i) in contacts" :key="i"
-                                class="p-1 d-flex border-top border-1 border-secondary justify-content-between"
+                            <div v-for="(contact,i) in contacts" :key="i" class="p-1 d-flex justify-content-between" :class="contact.visible ? 'border-top border-1 border-secondary' : ''"
                                 @click="setActiveContact(i)" :class="activeContact == i ? 'clicked': ''">
-                                <div class="d-flex" >
+                                <div class="d-flex w-100" v-if="contact.visible">
                                     <img :src="contact.avatar" class="userphoto" alt="">
                                     <div class="m-1 ">
                                         <span>{{contact.name}}</span>
                                         <p>ultimo messaggio inviato</p>
                                     </div>
-                                </div>
 
-                                <div>
+                                </div>
+                                <div v-if="contact.visible">
                                     <span>12.00</span>
                                 </div>
+
 
 
                             </div>
@@ -91,7 +92,7 @@
                     <div class="col-8 p-0">
                         <!-- header chat -->
                         <section class="chatHeader d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center ms-2">
                                 <img class="userphoto" :src="contacts[activeContact].avatar" alt="">
                                 <div class="d-flex flex-column m-2">
                                     <span>{{contacts[activeContact].name}}</span>
@@ -109,9 +110,10 @@
                         <!-- main -->
                         <section class="chatMain">
                             <div class="w-75 m-auto d-flex flex-column">
-                                <div v-for="(msg, i) in contacts[activeContact].messages" :class="msg.status == 'sent' ? 'sent p-1 m-1' : 'received p-1 m-1'">
+                                <div v-for="(msg, i) in contacts[activeContact].messages"
+                                    :class="msg.status == 'sent' ? 'sent p-1 m-1' : 'received p-1 m-1'">
                                     {{msg.message}}
-                                   <span class="time">{{convertDate(msg.date)}}</span> 
+                                    <span class="time">{{convertDate(msg.date)}}</span>
 
                                 </div>
                             </div>

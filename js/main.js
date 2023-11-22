@@ -169,7 +169,7 @@ const opzioni = {
 
             activeContact: 0,
             userMsg: "",
-
+            searchName:"",
 
 
 
@@ -190,25 +190,37 @@ const opzioni = {
             return text;
         },
 
-        sendMsg(){
-            const date=new Date()
-            let newMsg={
+        sendMsg() {
+            const date = new Date()
+            let newMsg = {
                 date: date.toISOString(),
-                message:this.userMsg,
-                status:'sent',
+                message: this.userMsg,
+                status: 'sent',
             }
             this.contacts[this.activeContact].messages.push(newMsg)
-            this.userMsg=""
+            this.userMsg = ""
 
-            setTimeout(()=>{
-                const date=new Date()
-            let newMsg={
-                date: date.toISOString(),
-                message:'ok',
-                status:'received',
-            }
-            this.contacts[this.activeContact].messages.push(newMsg)
-            },1000)
+            setTimeout(() => {
+                const date = new Date()
+                let newMsg = {
+                    date: date.toISOString(),
+                    message: 'ok',
+                    status: 'received',
+                }
+                this.contacts[this.activeContact].messages.push(newMsg)
+            }, 1000)
+        },
+
+        searchUser() {
+            this.contacts.forEach(element => {
+                if(element.name.includes(this.searchName)){
+                    element.visible=true
+                }else{
+                    element.visible=false
+                }
+
+            });
+           
         }
 
 
