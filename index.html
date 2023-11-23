@@ -65,11 +65,11 @@
                         <!-- searchbar -->
                         <div class="searchbar">
                             <div class="input-group p-1">
-                                <span class="input-group-text bg-white" id="basic-addon1" @click="searchUser">
+                                <span class="input-group-text bg-white" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass fa-xs" style="color: #bcbbba;"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="cerca o inizia una nuova chat"
-                                    aria-label="Username" aria-describedby="basic-addon1" v-model="searchName">
+                                    aria-label="Username" aria-describedby="basic-addon1" v-model="searchName" @keyUp="searchUser">
                             </div>
                         </div>
                         <!-- people -->

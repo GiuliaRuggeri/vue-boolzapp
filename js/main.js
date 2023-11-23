@@ -212,7 +212,7 @@ const opzioni = {
 
         searchUser() {
             this.contacts.forEach(element => {
-                if (element.name.includes(this.searchName)) {
+                if (element.name.toLowerCase().includes(this.searchName.toLowerCase())) {
                     element.visible = true
                 } else {
                     element.visible = false
