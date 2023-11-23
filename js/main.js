@@ -167,13 +167,16 @@ const opzioni = {
                         }
                     ],
                 }
+
             ],
 
             activeContact: 0,
             userMsg: "",
             searchName: "",
 
-
+            emojis:[
+                '😁', '😂', '😃', '😊'
+            ]
 
 
         }
@@ -224,6 +227,11 @@ const opzioni = {
 
         deleteMsg(index) {
             this.contacts[this.activeContact].messages.splice(index, 1)
+        },
+
+        emojiMsg(index){
+            console.log(this.emojis[index])
+            this.userMsg += this.emojis[index]
         }
 
 

@@ -69,14 +69,14 @@
                                     <i class="fa-solid fa-magnifying-glass fa-xs" style="color: #bcbbba;"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="cerca o inizia una nuova chat"
-                                    aria-label="Username" aria-describedby="basic-addon1" v-model="searchName" @keyUp="searchUser">
+                                    aria-label="Username" aria-describedby="basic-addon1" v-model="searchName"
+                                    @keyUp="searchUser">
                             </div>
                         </div>
                         <!-- people -->
                         <div class="bg-white">
                             <div v-for="(contact,i) in contacts" :key="i" class="p-1 d-flex justify-content-between"
                                 :class="[contact.visible ? 'border-top border-1 border-secondary' : '', activeContact == i ? 'clicked': '' ]"
-
                                 @click="setActiveContact(i)">
                                 <div class="d-flex w-100" v-if="contact.visible">
                                     <img :src="contact.avatar" class="userphoto" alt="">
@@ -104,7 +104,9 @@
                                 <img class="userphoto" :src="contacts[activeContact].avatar" alt="">
                                 <div class="d-flex flex-column m-2">
                                     <span>{{contacts[activeContact].name}}</span>
-                                    <p>Ultimo accesso oggi alle {{convertDate(contacts[activeContact].messages[contacts[activeContact].messages.length-1].date)}}</p>
+                                    <p>Ultimo accesso oggi alle
+                                        {{convertDate(contacts[activeContact].messages[contacts[activeContact].messages.length-1].date)}}
+                                    </p>
 
                                 </div>
 
@@ -139,7 +141,16 @@
                         <!-- footer -->
                         <section class="chatFooter">
                             <div class="d-flex justify-content-between align-items-center">
-                                <i class="fa-regular fa-face-smile fa-xl ms-2" style="color: #6b7375;"></i>
+                                <div class="dropup-center dropup">
+
+                                    <i data-bs-toggle="dropdown" class="fa-regular fa-face-smile fa-xl ms-2"
+                                        style="color: #6b7375;"></i>
+
+                                    <ul class="dropdown-menu">
+                                        <li v-for="(emoji, i) in emojis"><a class="dropdown-item" @click="emojiMsg(i)">{{emoji}}</a></li>
+                                    </ul>
+                                </div>
+                
                                 <div class="flex-grow-1 p-3">
                                     <input type="text" class="form-control mt-1" id="exampleFormControlInput1"
                                         placeholder="Scrivi un messaggio" v-model="userMsg" @keyUp.enter="sendMsg">
